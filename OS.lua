@@ -155,3 +155,19 @@ event.addHandler(
    end
 end
 )
+
+system.authorize()
+
+while true do
+  local success, path, line, traceback = system.call(workspace.start, workspace, 0)
+  if success then
+    break
+  else
+    system.updateWorkspace()
+    system.updateDesktop()
+    workspace:draw()
+    
+    system.error(path, line, traceback)
+    workspace:draw()
+  end
+end
